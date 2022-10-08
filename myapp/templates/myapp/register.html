@@ -1,0 +1,56 @@
+{% include "myapp/components/navbar.html" %}
+{% load static %}
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>WooFood</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/footer2.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/login.scss' %}" type="text/css">
+
+</head>
+<body class="body-background noselect" style="background-image: url({% static "images/index/fon.png"%})">
+
+
+<div class="flex-login">
+    <div class="modal grid1">
+        <div class="image-modal-register">
+            <img src="{% static 'images/navbar/logo.svg' %}" alt="">
+        </div>
+                {% if request.user.is_authenticated %}
+ <div class="modal__div">
+            <h1 class="modal__title" id="building-name">Вы залогинины!</h1>
+            <form>
+                <p class="p-login">Вы можете вернуться в меню магазина :)</p>
+                <button class="button-login"><a href="{% url 'menu' %}">Вернуться в меню</a></button>
+            </form>
+        </div>
+
+                                {% else %}
+
+        <div class="modal__div">
+            <h1 class="modal__title" id="building-name">Регистрация</h1>
+            <form method="POST"  autocomplete="off">
+                {% csrf_token %}
+                <div class="form-error">{{ form.non_field_errors }}</div>
+                {% for f in form %}
+                <p><label class="form-label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+                {% endfor %}
+                <button type="submit" class="button-login"><a>Зарегистрироваться</a></button>
+                <div class="a-registration">
+                <t>Есть аккаунт?<a href="{% url 'login' %}" class="field-registration">
+                    Войдите</t></div>
+                </a>
+            </form>
+        </div>
+                        {% endif %}
+
+    </div>
+</div>
+</body>
+</html>
+
+
+

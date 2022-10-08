@@ -1,0 +1,90 @@
+{% include "myapp/components/navbar.html" %}
+{% load static %}
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>WooFood</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/menu2.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/footer2.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/pagination.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/filter.scss' %}" type="text/css">
+
+</head>
+<body class="body-background noselect" style="background-image: url({% static "images/index/fon.png"%})">
+{% include "myapp/components/filter.html" %}
+
+<table class="table-index" style="min-height: 62%; flex-grow: 1;">
+    <div class="container">
+        {% for p in product %}
+        <td>
+            <div class="card">
+                <div class="card-header">
+                    <img src="{{p.image.url}}" alt="rover"/>
+                </div>
+                <div class="card-body">
+                    <span class="tag tag-teal">{{p.cat}}</span>
+                    <h4>
+                        {{p.title}}
+                    </h4>
+                    <div class="box">
+                        <small>{{p.weight}}</small>
+                        <button class="button-price">{{p.price}}р</button>
+                        <form action="{% url 'cart:cart_add' p.id %}" method="post">
+                            {% csrf_token %}
+                            {{ cart_product_form.quantity }}
+                            <input type="submit" class="modal__btn" value="Add to cart">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </td>
+    </div>
+</table>
+
+{% include "myapp/components/pagination.html" %}
+{% include "myapp/components/footer.html" %}
+
+</body>
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('body').on('click', '.input-minus, .input-plus', function(){
+		var $row = $(this).closest('.input-container');
+		var $input = $row.find('.input-text');
+		var step = $row.data('step');
+		var val = parseFloat($input.val());
+		if ($(this).hasClass('input-minus')) {
+			val -= step;
+		} else {
+			val += step;
+		}
+		$input.val(val);
+		$input.change();
+		return false;
+	});
+
+	$('body').on('change', '.input-text', function(){
+		var $input = $(this);
+		var $row = $input.closest('.input-container');
+		var step = $row.data('step');
+		var min = parseInt($row.data('min'));
+		var max = parseInt($row.data('max'));
+		var val = parseFloat($input.val());
+		if (isNaN(val)) {
+			val = step;
+		} else if (min && val < min) {
+			val = min;
+		} else if (max && val > max) {
+			val = max;
+		}
+		$input.val(val);
+	});
+});
+
+</script>

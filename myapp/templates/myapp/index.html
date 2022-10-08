@@ -1,0 +1,51 @@
+{% include "myapp/components/navbar.html" %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WooFood</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/index.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/footer1.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/pagination.scss' %}" type="text/css">
+
+</head>
+<body class="body-background noselect" style="background-image: url({% static "images/index/fon.png)" %}");>
+   <div class="grid">
+    <div class="image-peperony-index">
+        <a href="/menu">
+            <img src="{% static 'images/index/pizza-peperony.png' %}" alt="">
+            <span class="name-peperony-index">Pepperoni</span>
+            <p class="info-peperony-index">Такая же жгучая как первые отношения</p>
+        </a>
+    </div>
+
+   <div class="image-italian-index">
+       <a class="a-class" href="/">
+           <img src="{% static 'images/index/pizza-italian.png' %}" alt="">
+       </a>
+       <button class="name-italian-index">ITALIAN</button>
+    </div>
+   <div class="image-combo-index">
+       <a class="a-class" href="/">
+           <img src="{% static 'images/index/pizza-combo.png' %}" alt="">
+       </a>
+       <button class="name-combo-index">ITALIAN</button>
+    </div>
+   </div>
+<div class="info-24h-dilivery">
+    <li class="image-24h-dilivery image-24h">
+        <img src="{% static 'images/index/24h.svg' %}" alt="">
+    </li>
+    <li class="image-24h-dilivery image-dilivery">
+        <img src="{% static 'images/index/dilivery.svg' %}" alt="">
+    </li></br>
+        <t class="text-24h">Работаем без перерыва и выходных</t>
+        <t class="text-dilivery">Бесплатная доставка</t>
+</div>
+
+{% include "myapp/components/footer.html" %}
+
+</body>
+</html>

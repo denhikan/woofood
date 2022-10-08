@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="filter">
+<nav class="nav-filter">
+    <ul class="saidbar-ul">
+        <li class="list saidbar-li">
+            <a class="saidbar-a" href="{% url 'menu' %}">
+                Все товары
+                <span></span><span></span><span></span><span></span>
+            </a>
+        </li>
+        {% for c in cats %}
+        <li class="list saidbar-li">
+            <a class="saidbar-a" href="{{ c.get_absolute_url }}">
+                {{c.title}}
+                <span></span><span></span><span></span><span></span>
+            </a>
+            {% endfor %}
+        </li>
+    </ul></nav>
+</div>

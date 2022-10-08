@@ -1,0 +1,647 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en"><head>
+
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+*, *::before, *::after {
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  height: 100vh;
+  display: grid;
+  grid-template: repeat(15, 1fr)/repeat(15, 1fr);
+  overflow: hidden;
+}
+
+.cell {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.cell:nth-child(15n+1):hover ~ .content {
+  --positionX: 0;
+}
+
+.cell:nth-child(n+1):nth-child(-n+15):hover ~ .content {
+  --positionY: 0;
+}
+
+.cell:nth-child(15n+2):hover ~ .content {
+  --positionX: 1;
+}
+
+.cell:nth-child(n+16):nth-child(-n+30):hover ~ .content {
+  --positionY: 1;
+}
+
+.cell:nth-child(15n+3):hover ~ .content {
+  --positionX: 2;
+}
+
+.cell:nth-child(n+31):nth-child(-n+45):hover ~ .content {
+  --positionY: 2;
+}
+
+.cell:nth-child(15n+4):hover ~ .content {
+  --positionX: 3;
+}
+
+.cell:nth-child(n+46):nth-child(-n+60):hover ~ .content {
+  --positionY: 3;
+}
+
+.cell:nth-child(15n+5):hover ~ .content {
+  --positionX: 4;
+}
+
+.cell:nth-child(n+61):nth-child(-n+75):hover ~ .content {
+  --positionY: 4;
+}
+
+.cell:nth-child(15n+6):hover ~ .content {
+  --positionX: 5;
+}
+
+.cell:nth-child(n+76):nth-child(-n+90):hover ~ .content {
+  --positionY: 5;
+}
+
+.cell:nth-child(15n+7):hover ~ .content {
+  --positionX: 6;
+}
+
+.cell:nth-child(n+91):nth-child(-n+105):hover ~ .content {
+  --positionY: 6;
+}
+
+.cell:nth-child(15n+8):hover ~ .content {
+  --positionX: 7;
+}
+
+.cell:nth-child(n+106):nth-child(-n+120):hover ~ .content {
+  --positionY: 7;
+}
+
+.cell:nth-child(15n+9):hover ~ .content {
+  --positionX: 8;
+}
+
+.cell:nth-child(n+121):nth-child(-n+135):hover ~ .content {
+  --positionY: 8;
+}
+
+.cell:nth-child(15n+10):hover ~ .content {
+  --positionX: 9;
+}
+
+.cell:nth-child(n+136):nth-child(-n+150):hover ~ .content {
+  --positionY: 9;
+}
+
+.cell:nth-child(15n+11):hover ~ .content {
+  --positionX: 10;
+}
+
+.cell:nth-child(n+151):nth-child(-n+165):hover ~ .content {
+  --positionY: 10;
+}
+
+.cell:nth-child(15n+12):hover ~ .content {
+  --positionX: 11;
+}
+
+.cell:nth-child(n+166):nth-child(-n+180):hover ~ .content {
+  --positionY: 11;
+}
+
+.cell:nth-child(15n+13):hover ~ .content {
+  --positionX: 12;
+}
+
+.cell:nth-child(n+181):nth-child(-n+195):hover ~ .content {
+  --positionY: 12;
+}
+
+.cell:nth-child(15n+14):hover ~ .content {
+  --positionX: 13;
+}
+
+.cell:nth-child(n+196):nth-child(-n+210):hover ~ .content {
+  --positionY: 13;
+}
+
+.cell:nth-child(15n+15):hover ~ .content {
+  --positionX: 14;
+}
+
+.cell:nth-child(n+211):nth-child(-n+225):hover ~ .content {
+  --positionY: 14;
+}
+
+.content {
+  --positionX: 7;
+  --positionY: 7;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.css {
+  font-family: "Fredoka One", cursive;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-animation: color 3s infinite linear;
+          animation: color 3s infinite linear;
+  text-shadow: 0 0 10px #000a;
+  transition: all 0.5s;
+}
+.css:nth-child(1) {
+  font-size: 100px;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  opacity: 0.1;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * 21px)) translateY(calc(-50% - (var(--positionY) - 7) * 21px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(2) {
+  font-size: 110px;
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+  opacity: 0.2;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * 18px)) translateY(calc(-50% - (var(--positionY) - 7) * 18px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(3) {
+  font-size: 120px;
+  -webkit-animation-delay: -0.6s;
+          animation-delay: -0.6s;
+  opacity: 0.3;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * 15px)) translateY(calc(-50% - (var(--positionY) - 7) * 15px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(4) {
+  font-size: 130px;
+  -webkit-animation-delay: -0.9s;
+          animation-delay: -0.9s;
+  opacity: 0.4;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * 12px)) translateY(calc(-50% - (var(--positionY) - 7) * 12px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(5) {
+  font-size: 140px;
+  -webkit-animation-delay: -1.2s;
+          animation-delay: -1.2s;
+  opacity: 0.5;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * 9px)) translateY(calc(-50% - (var(--positionY) - 7) * 9px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(6) {
+  font-size: 150px;
+  -webkit-animation-delay: -1.5s;
+          animation-delay: -1.5s;
+  opacity: 0.6;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * 6px)) translateY(calc(-50% - (var(--positionY) - 7) * 6px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(7) {
+  font-size: 160px;
+  -webkit-animation-delay: -1.8s;
+          animation-delay: -1.8s;
+  opacity: 0.7;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * 3px)) translateY(calc(-50% - (var(--positionY) - 7) * 3px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(8) {
+  font-size: 170px;
+  -webkit-animation-delay: -2.1s;
+          animation-delay: -2.1s;
+  opacity: 0.8;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * 0px)) translateY(calc(-50% - (var(--positionY) - 7) * 0px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(9) {
+  font-size: 180px;
+  -webkit-animation-delay: -2.4s;
+          animation-delay: -2.4s;
+  opacity: 0.9;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * -3px)) translateY(calc(-50% - (var(--positionY) - 7) * -3px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+.css:nth-child(10) {
+  font-size: 190px;
+  -webkit-animation-delay: -2.7s;
+          animation-delay: -2.7s;
+  opacity: 1;
+  transform: translateX(calc(-50% - (var(--positionX) - 7) * -6px)) translateY(calc(-50% - (var(--positionY) - 7) * -6px)) rotateX(calc(0deg - (var(--positionY) - 7) * 5deg)) rotateY(calc((var(--positionX) - 7) * 5deg));
+}
+@-webkit-keyframes color {
+  0% {
+    color: #ef8f8f;
+  }
+  10% {
+    color: #efc98f;
+  }
+  20% {
+    color: #dcef8f;
+  }
+  30% {
+    color: #a3ef8f;
+  }
+  40% {
+    color: #8fefb6;
+  }
+  50% {
+    color: #8fefef;
+  }
+  60% {
+    color: #8fb6ef;
+  }
+  70% {
+    color: #a38fef;
+  }
+  80% {
+    color: #dc8fef;
+  }
+  90% {
+    color: #ef8fc9;
+  }
+  100% {
+    color: #ef8f8f;
+  }
+}
+@keyframes color {
+  0% {
+    color: #ef8f8f;
+  }
+  10% {
+    color: #efc98f;
+  }
+  20% {
+    color: #dcef8f;
+  }
+  30% {
+    color: #a3ef8f;
+  }
+  40% {
+    color: #8fefb6;
+  }
+  50% {
+    color: #8fefef;
+  }
+  60% {
+    color: #8fb6ef;
+  }
+  70% {
+    color: #a38fef;
+  }
+  80% {
+    color: #dc8fef;
+  }
+  90% {
+    color: #ef8fc9;
+  }
+  100% {
+    color: #ef8f8f;
+  }
+}
+.button-error
+{
+
+}
+</style>
+
+
+
+<body translate="no">
+  <div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+
+
+<div class="content">
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+  <div class="css">Error </br>500</div>
+</div>
+
+ <a href="{% url 'menu' %}">
+     <svg viewBox="45 60 400 320">
+    <path fill="#fff" d="M 90 210 C 90 180 90 150 90 150 C 150 150 180 150 180 150 C 180 150 300 150 300 150 C 300 150 330 150 390 150 C 390 150 390 180 390 210 C 390 240 390 270 390 270 C 330 270 300 270 300 270 C 300 270 180 270 180 270 C 180 270 150 270 90 270 C 90 270 90 240 90 210" mask="url(#knockout-text)">
+    </path>
+        <mask id="knockout-text">
+      <rect width="100%" height="100%" fill="#fff" x="0" y="0"></rect>
+      <text x="147" y="227" fill="#000">Назад</text>
+    </mask>
+</svg></a>
+
+
+
+
+
+
+</body></html>
+
+
+
+
+
+
+<style>
+svg {
+  width: 10vw;
+  position: fixed;
+  top: 90vh;
+  left: 5vw;
+  max-width: 430px;
+  transform: translateY(-50%) translateX(-50%);
+  z-index: 2;
+  filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.3));
+}
+svg path {
+  cursor: pointer;
+  -webkit-animation: blob 2s infinite forwards;
+          animation: blob 2s infinite forwards;
+  transform-origin: 50% 50%;
+}
+svg path:hover {
+  fill: #fafafa;
+}
+svg text {
+  font-size: 85px;
+}
+
+@-webkit-keyframes blob {
+  25% {
+    d: path("M 90 210 C 90 180 110 160 130 160 C 160 160 180 140 200 130 C 230 120 270 100 290 140 C 310 170 340 100 360 140 C 370 160 390 180 390 210 C 390 240 380 290 350 280 C 330 270 300 280 280 290 C 260 300 230 300 220 290 C 200 270 160 310 140 280 C 130 260 90 240 90 210 ");
+    transform: rotate(-5deg);
+  }
+  50% {
+    d: path("M 90 210 C 90 180 100 150 120 130 C 150 100 180 140 200 130 C 230 120 270 100 290 140 C 300 160 330 130 360 140 C 390 150 390 180 390 210 C 390 240 380 300 350 280 C 330 270 320 230 280 260 C 260 280 220 310 200 290 C 180 270 160 280 140 280 C 110 280 90 240 90 210");
+  }
+  75% {
+    d: path("M 90 210 C 90 180 110 180 130 170 C 150 160 170 130 200 130 C 240 130 260 150 290 140 C 310 130 340 120 360 140 C 380 160 390 180 390 210 C 390 240 380 260 350 270 C 320 280 290 270 270 260 C 240 250 230 280 210 290 C 180 310 130 300 110 280 C 90 260 90 240 90 210");
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes blob {
+  25% {
+    d: path("M 90 210 C 90 180 110 160 130 160 C 160 160 180 140 200 130 C 230 120 270 100 290 140 C 310 170 340 100 360 140 C 370 160 390 180 390 210 C 390 240 380 290 350 280 C 330 270 300 280 280 290 C 260 300 230 300 220 290 C 200 270 160 310 140 280 C 130 260 90 240 90 210 ");
+    transform: rotate(-5deg);
+  }
+  50% {
+    d: path("M 90 210 C 90 180 100 150 120 130 C 150 100 180 140 200 130 C 230 120 270 100 290 140 C 300 160 330 130 360 140 C 390 150 390 180 390 210 C 390 240 380 300 350 280 C 330 270 320 230 280 260 C 260 280 220 310 200 290 C 180 270 160 280 140 280 C 110 280 90 240 90 210");
+  }
+  75% {
+    d: path("M 90 210 C 90 180 110 180 130 170 C 150 160 170 130 200 130 C 240 130 260 150 290 140 C 310 130 340 120 360 140 C 380 160 390 180 390 210 C 390 240 380 260 350 270 C 320 280 290 270 270 260 C 240 250 230 280 210 290 C 180 310 130 300 110 280 C 90 260 90 240 90 210");
+    transform: rotate(5deg);
+  }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+

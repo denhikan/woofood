@@ -1,0 +1,27 @@
+footer
+{
+     background: rgb(20, 2, 2);
+     width: 100%;
+     margin-top: 10px;
+     position: absolute;
+     clip-path: polygon(52% 35%, 75% 23%, 90% 11%, 100% 0, 100% 100%, 0 100%, 0 0, 10% 12%, 28% 25%);
+     background: #ffffff;
+     padding-top: 20px;
+     cursor: default;
+}
+footer p
+{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+}
+.footer-figura
+{
+    clip-path: polygon(50% 100%, 100% 0%, 100% 100%, 0 100%, 0 0);
+    width: 100%;
+    background: #ffffff;
+}
+

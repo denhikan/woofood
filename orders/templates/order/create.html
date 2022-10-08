@@ -1,0 +1,67 @@
+ {% include "myapp/components/navbar.html" %}
+{% load static %}
+<!doctype html>
+ <html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>WooFood</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/footer2.scss' %}" type="text/css">
+
+</head>
+<body class="body-background noselect" style="background-image: url({% static "images/index/fon.png"%})">
+<div class="">
+    <div class="create__title"><h1>Оформление заказа</h1></div>
+        <div class="create__flex">
+        <div class="order-info">
+            <h3>Your order</h3>
+            <ul>
+                {% for item in cart %}
+                    <li>
+                        {{ item.quantity }}x {{ item.product.name }}
+                        <span>${{ item.total_price }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <p>Total: ${{ cart.get_total_price }}</p>
+        </div>
+        <div class="create__form">
+            <form action="." method="post" class="order-form">
+                {{ form.as_p }}
+                <p><input type="submit" value="Place order"></p>
+                {% csrf_token %}
+            </form>
+        </div>
+</div>
+    </div>
+</body>
+</html>
+
+ <style>
+.create__title
+{
+    text-align: center;
+    color: #ffffff;
+}
+
+.create__flex
+{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.order-info
+{
+    background: #ffffff;
+}
+.create__form
+{
+    background: #ffffff;
+}
+.create__form form
+{
+    display: grid;
+    grid-template-columns: repeat(2, 12rem);
+}
+ </style>

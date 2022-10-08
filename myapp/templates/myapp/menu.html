@@ -1,0 +1,150 @@
+{% include "myapp/components/navbar.html" %}
+{% load static %}
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>WooFood</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/menu.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/footer2.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/pagination.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/filter.scss' %}" type="text/css">
+
+</head>
+<body class="body-background noselect" style="background-image: url({% static "images/index/fon.png"%})">
+{% include "myapp/components/filter.html" %}
+
+<table class="table-index" style="min-height: 62%; flex-grow: 1;">
+    <div class="container">
+        {% for p in page_obj %}
+
+        <td>
+             <a href="#m2-o" class="link-1 building-link"
+                                    data-image="{{p.image.url}}"
+                                    data-name="{{p.title}}"
+                                    data-descriprion="Состав:</br>{{p.descriprion}}"
+                                    data-price="{{p.price}}<small>₽</small>"
+                                    data-size="{{p.size|default_if_none:""}}"
+                                    data-testo="{{p.testo|default_if_none:""}}"
+                                    data-weight="{{p.weight|default_if_none:""}}"
+                                    id="m2-c">
+            <div class="card">
+                <div class="card-header">
+                    <img src="{{p.image.url}}" alt="rover"/>
+                </div>
+                <div class="card-body">
+                    <span class="tag tag-teal">{{p.cat}}</span>
+                    <h4>
+                        {{p.title}}
+                    </h4>
+                    <div class="box">
+                        <small>{{p.weight}}</small>
+                            <button class="button-price">{{p.price}}р</button>
+                    </div>
+                </div>
+            </div></a>
+            {% endfor %}
+        </td>
+        {% for p in page_obj%}
+
+        <div class="modal-container" id="m2-o" style="--m-background: hsla(0, 0%, 0%, .7);">
+            <div class="modal grid1">
+                <div class="image-modal">
+                    <img id="building-img" src="{{p.image.url}}" alt=""
+                         style="width: 22rem;min-height:300px; max-height: 350px; object-fit: cover;"/>
+                </div>
+                <div class="modal__div">
+                    <h1 class="modal__title" id="building-name">{{p.title}}</h1>
+                    <p class="modal__info">
+                        <t id="building-size">{{p.size|default_if_none:""}}</t>
+                        <t id="building-testo">{{p.testo|default_if_none:""}}</t>
+                        <t id="building-weight">{{p.weight|default_if_none:""}}</t>
+                    </p>
+                    <p class="modal__text" id="building-descriprion">Состав:</br>{{p.descriprion}}</p>
+                    <div class="modal__flex_info">
+                        <div class="input-container" data-step="1" data-min="1" data-max="100">
+                            <input class="input-text" type="text" name="count" value="1">
+                            <a href="#" class="input-minus">−</a>
+                            <a href="#" class="input-plus">+</a>
+                        </div>
+                        <p class="modal__price" id="building-price">{{p.price}}<small>₽</small>
+                            <a href="#m2-c" class="link-2"></a>
+
+                        <form id="cart_product_form" action="{% url 'cart:cart_add' p.id %}" method="post">
+                            {% csrf_token %}
+                                {{ cart_product_form.quantity }}
+
+                            <input type="submit" class="modal__btn" value="Add to cart">
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</table>
+
+{% include "myapp/components/pagination.html" %}
+{% include "myapp/components/footer.html" %}
+
+</body>
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('body').on('click', '.input-minus, .input-plus', function(){
+		var $row = $(this).closest('.input-container');
+		var $input = $row.find('.input-text');
+		var step = $row.data('step');
+		var val = parseFloat($input.val());
+		if ($(this).hasClass('input-minus')) {
+			val -= step;
+		} else {
+			val += step;
+		}
+		$input.val(val);
+		$input.change();
+		return false;
+	});
+
+	$('body').on('change', '.input-text', function(){
+		var $input = $(this);
+		var $row = $input.closest('.input-container');
+		var step = $row.data('step');
+		var min = parseInt($row.data('min'));
+		var max = parseInt($row.data('max'));
+		var val = parseFloat($input.val());
+		if (isNaN(val)) {
+			val = step;
+		} else if (min && val < min) {
+			val = min;
+		} else if (max && val > max) {
+			val = max;
+		}
+		$input.val(val);
+	});
+});
+
+</script>
+<script>
+$('.building-link').click(function(){
+    $('#building-img').attr('src', $(this).data('image'));
+    $('#building-name').html($(this).data('name'));
+    $('#building-descriprion').html($(this).data('descriprion'));
+    $('#building-price').html($(this).data('price'));
+    $('#building-size').html($(this).data('size'));
+    $('#building-weight').html($(this).data('weight'));
+    $('#building-testo').html($(this).data('testo'));
+      function form_submit() {
+            document.getElementById("cart_product_form").submit();
+       }
+});
+
+
+
+</script>
