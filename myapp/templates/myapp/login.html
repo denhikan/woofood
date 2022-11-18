@@ -11,7 +11,7 @@
 
 </head>
 <body class="body-background noselect" style="background-image: url({% static "images/index/fon.png"%})">
-
+<div style="min-height: 58%">
 <div class="flex-login">
     <div class="modal grid1">
         <div class="image-modal-register">
@@ -36,7 +36,7 @@
                 <p><label class="form-label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
                 <div class="form-error">{{ f.errors }}</div>
                 {% endfor %}
-                <button class="button-login"><a href="{% url 'menu' %}">Войти</a></button>
+                <button class="button-login">Войти</button>
                 <div class="a-registration">
                 <t>Нет аккаунта?<a href="{% url 'register' %}" class="field-registration">
                     Регистрация</t></div>
@@ -46,6 +46,8 @@
                                 {% endif %}
     </div>
 </div>
+</div>
+{% include "myapp/components/footer.html" %}
 </body>
 </html>
 

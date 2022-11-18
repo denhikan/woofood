@@ -1,0 +1,48 @@
+{% include "myapp/components/navbar.html" %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WooFood</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/index.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/footer1.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/pagination.scss' %}" type="text/css">
+</head>
+<body class="body-background noselect" style="background-image: url({% static "images/index/fon.png)" %}");>
+<div class="p-title">
+    <p>
+        Промокоды и акции!
+    </p>
+</div>
+<div class="p-description">
+    <p>К сожалению, на данный момент акции отстутсвуют!</p>
+</div>
+</body>
+</html>
+
+<style>
+.p-title
+{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 2rem;
+    line-height: 2rem;
+    color: #FFFFFF;
+    text-align: center;
+    margin-top: 3rem;
+}
+.p-description
+{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #FFFFFF;
+    text-align: center;
+    margin-top: 3rem;
+}
+</style>
