@@ -8,10 +8,22 @@
     <link rel="stylesheet" href="{% static 'css/navbar.scss' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/footer2.scss' %}" type="text/css">
 
+
 </head>
 <body class="body-background noselect" style="background-image: url({% static "images/index/fon.png"%})">
 
+{% with total_items=cart|length %}
+    {% if cart|length == 0 %}
+
+<div class="p__no-product">
+    <p>Корзина пуста, вернитесь в меню!</p>
+</div>
+    {% else %}
+
+
+
 <div class="grid-1">
+
 <table class="table-index" style="min-height: 62%; flex-grow: 1">
     <div class="container">
 {% for item in cart %}
@@ -58,9 +70,16 @@
         </td>
     </div>
 </table>
+
+                {% endif %}
+            {% endwith %}
+
     {% for item in cart %}
 
+
+
       <div class="basket__info">
+          {% if request.user.is_authenticated %}
           <div>
               <table>
                   <p>Детали заказа</p>
@@ -80,6 +99,16 @@
               <button class="basket__btn"><a href="{% url "orders:order_create" %}">ОФОРМИТЬ ЗАКАЗ</a></button>
 
           </div>
+
+                        {% else %}
+          <div>
+              <p>Для оформления заказа необходимо войти в аккаунт</p>
+              <button class="button-login"><a href="{% url 'login' %}">Войти</a></button>
+
+          </div>
+
+
+                          {% endif %}
       </div>
     {% endfor %}
 
@@ -192,7 +221,7 @@ body {
 
 .grid-1
 {
-    min-height: 73%;
+    min-height: 72%;
     display: flex;
     flex-direction: row-reverse;
 }
@@ -237,8 +266,13 @@ body {
     margin-right: 1rem;
     margin-top: 1rem;
     margin-bottom: 2rem;
+    margin-left: 2.2rem;
 }
-
+.basket__btn a
+{
+    text-decoration: none;
+    color: #ffffff;
+}
 .p__basket
 {
     font-family: 'Montserrat';
@@ -318,5 +352,39 @@ body {
     flex-direction: row;
     justify-content: space-between;
     margin-right: 1rem;
+}
+.button-login
+{
+    background: #4683D9;
+    border-radius: 12px;
+    width: 20rem;
+    height: 42px;
+    border: none;
+    margin-left: 2.5rem;
+    cursor: pointer;
+}
+.button-login a
+{
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.p__no-product
+{
+    min-height: 44%;
+    display: flex;
+    justify-content:center;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding-top: 15%;
 }
 </style>

@@ -28,6 +28,7 @@
                                     data-size="{{p.size|default_if_none:""}}"
                                     data-testo="{{p.testo|default_if_none:""}}"
                                     data-weight="{{p.weight|default_if_none:""}}"
+                                    data-cart="{% url 'cart:cart_add' p.id %}"
                                     id="m2-c">
             <div class="card">
                 <div class="card-header">
@@ -68,19 +69,18 @@
                             <a href="#" class="input-minus">−</a>
                             <a href="#" class="input-plus">+</a>
                         </div>
-                        <p class="modal__price" id="building-price">{{p.price}}<small>₽</small>
+                        <p class="modal__price" id="building-price">{{p.price}}<small>₽</small></p>
                             <a href="#m2-c" class="link-2"></a>
 
-                        <form id="cart_product_form" action="{% url 'cart:cart_add' p.id %}" method="post">
+                        <form id="building-cart" action="{% url 'cart:cart_add' p.id %}" method="post">
                             {% csrf_token %}
                                 {{ cart_product_form.quantity }}
 
-                            <input type="submit" class="modal__btn" value="Add to cart">
+                            <input type="submit" class="modal__btn" value="В корзину">
                         </form>
 
                     </div>
                 </div>
-
             </div>
         </div>
         {% endfor %}
@@ -140,9 +140,7 @@ $('.building-link').click(function(){
     $('#building-size').html($(this).data('size'));
     $('#building-weight').html($(this).data('weight'));
     $('#building-testo').html($(this).data('testo'));
-      function form_submit() {
-            document.getElementById("cart_product_form").submit();
-       }
+    $('#building-cart').html($(this).data('cart'));
 });
 
 

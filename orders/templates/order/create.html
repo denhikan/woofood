@@ -7,61 +7,92 @@
     <title>WooFood</title>
     <link rel="stylesheet" href="{% static 'css/navbar.scss' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/footer2.scss' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/order_create.scss' %}" type="text/css">
 
 </head>
 <body class="body-background noselect" style="background-image: url({% static "images/index/fon.png"%})">
-<div class="">
-    <div class="create__title"><h1>Оформление заказа</h1></div>
-        <div class="create__flex">
-        <div class="order-info">
-            <h3>Your order</h3>
-            <ul>
-                {% for item in cart %}
-                    <li>
-                        {{ item.quantity }}x {{ item.product.name }}
-                        <span>${{ item.total_price }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
-            <p>Total: ${{ cart.get_total_price }}</p>
-        </div>
+<div style="min-height: 71.5%;">
+    <div class="create__title"><p>Оформление заказа</p></div>
+    <div class="create__flex">
         <div class="create__form">
             <form action="." method="post" class="order-form">
-                {{ form.as_p }}
-                <p><input type="submit" value="Place order"></p>
+                <div class="odrer__name">
+                    <t>Имя</t>
+                    {{ form.first_name}}
+                </div>
+                <div class="odrer__number">
+                    <t>Номер телефона</t>
+                    {{ form.number_telephone}}
+                </div>
+                <div class="order__info__margin">
+                    <div class="order__info">
+                        <div class="input-container">
+                            {{ form.city}}
+                            <label>Город</label>
+                        </div>
+                        <div class="input-container">
+                            {{ form.street}}
+                            <label>Улица</label>
+                        </div>
+                        <div class="input-container">
+                            {{ form.house}}
+                            <label>Дом</label>
+                        </div>
+                    </div>
+
+                <div class="order__info order__info_2">
+                    <div class="input-container">
+                        {{ form.entrance }}
+                        <label>Подъезд</label>
+                    </div>
+                    <div class="input-container">
+                        {{ form.floor}}
+                        <label>Этаж</label>
+                    </div>
+                    <div class="input-container">
+                        {{ form.flat}}
+                        <label>Квартира</label>
+                    </div>
+                </div>
+                </div>
+
+                <p><input class="order__button" type="submit" value="Оплатить"></p>
                 {% csrf_token %}
             </form>
         </div>
-</div>
+
+
+        <div class="order-info">
+            <h3>Детали заказа</h3>
+            <ul>
+                {% for item in cart %}
+                <li>
+                    <div class="order__card">
+                        <div class="image">
+                            <img src="{{item.product.image.url}}"/>
+                        </div>
+                        <div class="content">
+                            <p>{{item.product.title}}</p>
+                            <p class="order__quantity">{{ item.quantity }}шт</p>
+                            <div class="basket__close">
+                                <a href="{% url 'orders:order_remove' item.product.id %}">
+                                     <button class="noselect"><span class="text">Удалить</span><span class="icon">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+                                </a>
+                                 <p>₽{{ item.total_price }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="order__total__1"><p class="order__total">Всего: {{ cart.get_total_price }}₽</p></div>
+        </div>
     </div>
+</div>
+{% include "myapp/components/footer.html" %}
+
+
 </body>
 </html>
-
- <style>
-.create__title
-{
-    text-align: center;
-    color: #ffffff;
-}
-
-.create__flex
-{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-}
-
-.order-info
-{
-    background: #ffffff;
-}
-.create__form
-{
-    background: #ffffff;
-}
-.create__form form
-{
-    display: grid;
-    grid-template-columns: repeat(2, 12rem);
-}
- </style>

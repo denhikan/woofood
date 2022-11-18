@@ -4,11 +4,13 @@ from myapp.models import Product
 
 class Order(models.Model):
     first_name = models.CharField(max_length=50, verbose_name='Имя')
-    last_name = models.CharField(max_length=50, verbose_name='Фамилия')
-    email = models.EmailField(verbose_name='Адрес эл.почты')
-    address = models.CharField(max_length=250, verbose_name='Адрес проживания')
     number_telephone = models.CharField(max_length=20, verbose_name='Номер телефона')
     city = models.CharField(max_length=100, verbose_name='Город')
+    street = models.CharField(max_length=250, verbose_name='Улица')
+    house = models.CharField(max_length=250, verbose_name='Дом')
+    entrance = models.CharField(max_length=250, null=True, blank=True, default=None, verbose_name='Подьезд')
+    floor = models.CharField(max_length=250, null=True, blank=True, default=None, verbose_name='Этаж')
+    flat = models.CharField(max_length=250, null=True, blank=True, default=None, verbose_name='Квартира')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)

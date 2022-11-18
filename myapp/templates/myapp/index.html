@@ -14,7 +14,7 @@
 <body class="body-background noselect" style="background-image: url({% static "images/index/fon.png)" %}");>
    <div class="grid">
     <div class="image-peperony-index">
-        <a href="/menu">
+        <a href="{% url 'menu' %}">
             <img src="{% static 'images/index/pizza-peperony.png' %}" alt="">
             <span class="name-peperony-index">Pepperoni</span>
             <p class="info-peperony-index">Такая же жгучая как первые отношения</p>
@@ -22,13 +22,13 @@
     </div>
 
    <div class="image-italian-index">
-       <a class="a-class" href="/">
+       <a class="a-class" href="{% url 'menu' %}">
            <img src="{% static 'images/index/pizza-italian.png' %}" alt="">
        </a>
        <button class="name-italian-index">ITALIAN</button>
     </div>
    <div class="image-combo-index">
-       <a class="a-class" href="/">
+       <a class="a-class" href="{% url 'menu' %}">
            <img src="{% static 'images/index/pizza-combo.png' %}" alt="">
        </a>
        <button class="name-combo-index">ITALIAN</button>
